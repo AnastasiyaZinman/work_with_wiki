@@ -1,0 +1,14 @@
+.title, .author, .description, .image, .pages, .minutes {
+    display: none;
+  }
+  
+  .show {
+    display: block;
+  }
+img {
+  margin: 0 40px;
+}
+.description {
+text-decoration: underline;
+display: flex;
+}
