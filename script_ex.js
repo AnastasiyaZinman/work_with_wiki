@@ -1,12 +1,15 @@
 const SEARCHING_POPULATION_TEXT = "Population•&#160;",
   SEARCHING_AREA_TEXT = "Area •&#160;",
   SEARCHING_FLAG_TEXT = 'src=\\"',
-  SEARCHING_CAPITAL_TEXT = 'Capital\n';
+  SEARCHING_CAPITAL_TEXT = 'Capital\n',
+  country_code = 'us';
+
 $('button').on('click', function () {
   $('.book-list').empty();
   var title = $('input').val();
   //---First Checking entered title
   fetch(title);
+  fetch_news();
 })
 
 function findCapital(str, searching_text) {
@@ -67,8 +70,38 @@ function findInfo(data, title) {
   answer["population"] = findCountryInfo(data.text, SEARCHING_POPULATION_TEXT, '&');
   answer["area"] = findCountryInfo(data.text, SEARCHING_AREA_TEXT, '&');
   answer["flag_path"] = 'https:'+findCountryInfo(JSON.stringify(data), SEARCHING_FLAG_TEXT, '\\');
-  console.log(answer);
+  console.log(answer);//answer from wiki
   AppendData(answer);
+}
+function addNews(data){
+var news_list=[];
+// console.log("articles",data.articles);
+for (let count_of_news =0;count_of_news<3; count_of_news++){
+  news_list.push(data.articles[count_of_news]);
+}
+console.log(news_list); //answer from news resourse
+
+}
+
+var fetch_news = function(title){
+  $.ajax({
+    method: "GET",
+    url: 'https://newsapi.org/v2/top-headlines?' + 'country=' +country_code+'&' +
+    'apiKey=2017d3de160740f3b8a997f22a80c4aa',
+    dataType: "json",
+    success: function (data_news) {
+      if (JSON.stringify(data_news) !== 'null') {
+         console.log(data_news);
+         addNews(data_news);
+      }
+      else alert('Enter another country');
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log(textStatus);
+    }
+  });
+  
+
 }
 
 var fetch = function (title) {
