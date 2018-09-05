@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Country Information Searching</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css">
+  <!-- <link rel="stylesheet" type="text/css" href="node_modules/font-awesome/css/font-awesome.css"> -->
   <link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <!-- <link rel="EditURI" type="application/rsd+xml" href="//www.mediawiki.org/w/api.php?action=rsd" /> -->
   <link rel="stylesheet" type="text/css" href="style.css">
@@ -27,7 +27,7 @@
             <h3>Enter Country Name</h3>
 
             <div class="form-group">
-              <input type="text" id="isbn" class="form-control" placeholder="Book Title">
+              <input type="text" id="isbn" class="form-control" placeholder="Counrty Title">
             </div>
             <button type="reset" class="btn btn-primary search-book">Search</button>
           </div>
@@ -40,7 +40,20 @@
       </div>
     </div>
   </div>
-
+  <script id="country-template" type="text/x-handlebars-template">    
+   
+    {{#if country}}
+    <li> {{ country }} </li>
+    <p> Capital: {{capital }} </p>
+    <p> <span class="description">Area:</span> {{area}} </p>
+    <p> <span class="population">Population:</span> {{population}} </p>
+    <!-- <p> <span class="flag_path">Flag Path:</span> {{flag_path}} </p> -->
+    <img src="{{flag_path}}" alt="image" title="{{country}}" />
+    {{/if}}
+    
+   
+  
+    </script>
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
   <script src="script_ex.js"></script>
